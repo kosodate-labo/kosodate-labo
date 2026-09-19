@@ -148,90 +148,93 @@
     }
     .btn-sm { padding: 12px; font-size: 14px; }
 
-    /* ─── カテゴリセクション ─── */
-    .cat-section { margin: 0 16px 8px; }
-    .cat-title {
-      font-size: 15px;
+    /* ─── 画面切り替え（ホーム／カテゴリページ） ─── */
+    [hidden] { display: none !important; }
+
+    /* ─── カテゴリ・タイル一覧（ホーム画面） ─── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 0 16px 24px;
+    }
+    .cat-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: white;
+      border-radius: 16px;
+      padding: 18px 10px;
+      text-decoration: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+      border: 1px solid #ffe3ee;
+      transition: transform .1s;
+    }
+    .cat-tile:active { transform: scale(.97); }
+    .cat-tile-icon { font-size: 28px; margin-bottom: 8px; }
+    .cat-tile-label {
+      font-size: 13px;
       font-weight: bold;
       color: #444;
-      padding: 10px 14px;
-      background: white;
-      border-radius: 12px 12px 0 0;
-      border-bottom: 2px solid #FF6BAE;
-      margin-bottom: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      scroll-margin-top: 12px;
+      line-height: 1.4;
+      margin-bottom: 8px;
     }
-    .cat-count {
+    .cat-tile-count {
       font-size: 11px;
-      font-weight: normal;
       color: #fff;
       background: #FF6BAE;
-      padding: 2px 9px;
+      padding: 2px 10px;
       border-radius: 20px;
-      flex-shrink: 0;
     }
 
-    /* ─── カテゴリ・クイックナビ ─── */
-    .nav-bar {
+    /* ─── カテゴリページ（個別ページ） ─── */
+    .cat-view-bar {
       position: sticky;
       top: 0;
       z-index: 10;
       background: #FFF5F8;
-      padding: 10px 16px;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      scrollbar-width: none;
     }
-    .nav-bar::-webkit-scrollbar { display: none; }
-    .nav-chip {
-      display: inline-block;
+    .back-link {
+      flex-shrink: 0;
       background: white;
-      color: #e91e8c;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 8px 14px;
-      margin-right: 8px;
-      border-radius: 20px;
-      text-decoration: none;
-      border: 1px solid #ffd3e6;
-      white-space: nowrap;
-    }
-
-    /* ─── もっと見る（詳細表示） ─── */
-    .more-items summary {
-      cursor: pointer;
-      list-style: none;
-      background: #fff;
       color: #e91e8c;
       font-size: 13px;
       font-weight: bold;
-      text-align: center;
-      padding: 14px;
-      margin-bottom: 2px;
-      border-top: 1px dashed #ffd3e6;
+      padding: 8px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      border: 1px solid #ffd3e6;
     }
-    .more-items summary::-webkit-details-marker { display: none; }
-    .more-items[open] summary { margin-bottom: 0; }
+    .cat-view-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #444;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .pr-note-sm { margin: 12px 16px; }
 
     .back-to-top {
       display: block;
       text-align: center;
-      font-size: 11px;
-      color: #bbb;
+      font-size: 12px;
+      color: #e91e8c;
+      font-weight: bold;
       text-decoration: none;
-      padding: 10px;
+      padding: 16px;
     }
 
     .cat-body {
-      border-radius: 0 0 12px 12px;
+      margin: 0 16px 8px;
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 8px;
     }
     .item-card {
       background: white;
@@ -278,29 +281,32 @@
 </head>
 <body>
 
-  <!-- ヘッダー -->
-  <div class="header" id="top">
-    <div class="header-icon">🌸</div>
-    <h1>こそだてラボ</h1>
-    <p>子育てをもっと楽しく、もっと豊かに✨<br>
-       実際に役立つグッズをまとめました♪</p>
-  </div>
+  <!-- ホーム画面 -->
+  <div class="view" id="view-home">
 
-  <!-- note誘導 -->
-  <a href="https://note.com/mzk0732" class="note-banner" target="_blank" rel="noopener">
-    📖 noteで詳しい記事を読む →
-  </a>
+    <!-- ヘッダー -->
+    <div class="header">
+      <div class="header-icon">🌸</div>
+      <h1>こそだてラボ</h1>
+      <p>子育てをもっと楽しく、もっと豊かに✨<br>
+         実際に役立つグッズをまとめました♪</p>
+    </div>
 
-  <!-- PRノート -->
-  <div class="pr-note">
-    ⚠️ このページにはAmazonアソシエイト・楽天アフィリエイトの広告リンクが含まれます（#PR）
-  </div>
+    <!-- note誘導 -->
+    <a href="https://note.com/mzk0732" class="note-banner" target="_blank" rel="noopener">
+      📖 noteで詳しい記事を読む →
+    </a>
 
-  <!-- ランキングセクション -->
-  <div class="section-label">🏆 ママ・パパに大人気！</div>
-  <div class="section-sub">先輩ママが選んだ殿堂入りグッズ TOP3</div>
+    <!-- PRノート -->
+    <div class="pr-note">
+      ⚠️ このページにはAmazonアソシエイト・楽天アフィリエイトの広告リンクが含まれます（#PR）
+    </div>
 
-  
+    <!-- ランキングセクション -->
+    <div class="section-label">🏆 ママ・パパに大人気！</div>
+    <div class="section-sub">先輩ママが選んだ殿堂入りグッズ TOP3</div>
+
+    
         <div class="rank-card rank-1">
           <div class="rank-badge" style="background:#FFD700; color:#7a5800;">🥇 No.1 殿堂入り</div>
           <div class="rank-name">はらぺこあおむし 英語絵本 ボードブック</div>
@@ -344,16 +350,132 @@
           </div>
         </div>
 
-  <!-- カテゴリ・クイックナビ -->
-  <div class="section-label">🗂️ カテゴリから探す</div>
-  <div class="section-sub">タップして気になるジャンルへジャンプ！</div>
-  <div class="nav-bar">
-    <a href="#cat-0" class="nav-chip">📚 英語・バイリンガル教育</a><a href="#cat-1" class="nav-chip">📖 読み聞かせ・絵本</a><a href="#cat-2" class="nav-chip">🌱 モンテッソーリ・知育</a><a href="#cat-3" class="nav-chip">😴 睡眠・生活リズム</a><a href="#cat-4" class="nav-chip">💬 しつけ・声かけ・心理学</a><a href="#cat-5" class="nav-chip">📱 デジタル・知育アプリ</a><a href="#cat-6" class="nav-chip">🧠 発達・学習サポート</a><a href="#cat-7" class="nav-chip">💪 子育て・育児グッズ</a><a href="#cat-8" class="nav-chip">🎵 音楽・アート</a><a href="#cat-9" class="nav-chip">👨‍👩‍👧 夫婦・パートナーシップ</a><a href="#cat-10" class="nav-chip">🌳 外遊び・おもちゃ</a><a href="#cat-11" class="nav-chip">💕 子育て便利グッズ</a><a href="#cat-12" class="nav-chip">👪 共働き・ワンオペ育児</a><a href="#cat-13" class="nav-chip">💰 お金・金銭教育</a><a href="#cat-14" class="nav-chip">💻 AI・デジタル時代の子育て</a><a href="#cat-15" class="nav-chip">🧺 生活スキル・お手伝い</a><a href="#cat-16" class="nav-chip">⚽ スポーツ・外遊び</a><a href="#cat-17" class="nav-chip">🏫 習い事・教育</a><a href="#cat-18" class="nav-chip">🍱 食育・健康</a><a href="#cat-19" class="nav-chip">🎒 小学校準備</a>
+    <!-- カテゴリ一覧 -->
+    <div class="section-label">🗂️ カテゴリから探す</div>
+    <div class="section-sub">タップして気になるジャンルへ！</div>
+    <div class="cat-grid">
+      
+        <a href="#cat-0" class="cat-tile">
+          <span class="cat-tile-icon">📚</span>
+          <span class="cat-tile-label">英語・バイリンガル教育</span>
+          <span class="cat-tile-count">21件</span>
+        </a>
+        <a href="#cat-1" class="cat-tile">
+          <span class="cat-tile-icon">📖</span>
+          <span class="cat-tile-label">読み聞かせ・絵本</span>
+          <span class="cat-tile-count">9件</span>
+        </a>
+        <a href="#cat-2" class="cat-tile">
+          <span class="cat-tile-icon">🌱</span>
+          <span class="cat-tile-label">モンテッソーリ・知育</span>
+          <span class="cat-tile-count">7件</span>
+        </a>
+        <a href="#cat-3" class="cat-tile">
+          <span class="cat-tile-icon">😴</span>
+          <span class="cat-tile-label">睡眠・生活リズム</span>
+          <span class="cat-tile-count">14件</span>
+        </a>
+        <a href="#cat-4" class="cat-tile">
+          <span class="cat-tile-icon">💬</span>
+          <span class="cat-tile-label">しつけ・声かけ・心理学</span>
+          <span class="cat-tile-count">52件</span>
+        </a>
+        <a href="#cat-5" class="cat-tile">
+          <span class="cat-tile-icon">📱</span>
+          <span class="cat-tile-label">デジタル・知育アプリ</span>
+          <span class="cat-tile-count">9件</span>
+        </a>
+        <a href="#cat-6" class="cat-tile">
+          <span class="cat-tile-icon">🧠</span>
+          <span class="cat-tile-label">発達・学習サポート</span>
+          <span class="cat-tile-count">36件</span>
+        </a>
+        <a href="#cat-7" class="cat-tile">
+          <span class="cat-tile-icon">💪</span>
+          <span class="cat-tile-label">子育て・育児グッズ</span>
+          <span class="cat-tile-count">19件</span>
+        </a>
+        <a href="#cat-8" class="cat-tile">
+          <span class="cat-tile-icon">🎵</span>
+          <span class="cat-tile-label">音楽・アート</span>
+          <span class="cat-tile-count">18件</span>
+        </a>
+        <a href="#cat-9" class="cat-tile">
+          <span class="cat-tile-icon">👨‍👩‍👧</span>
+          <span class="cat-tile-label">夫婦・パートナーシップ</span>
+          <span class="cat-tile-count">16件</span>
+        </a>
+        <a href="#cat-10" class="cat-tile">
+          <span class="cat-tile-icon">🌳</span>
+          <span class="cat-tile-label">外遊び・おもちゃ</span>
+          <span class="cat-tile-count">22件</span>
+        </a>
+        <a href="#cat-11" class="cat-tile">
+          <span class="cat-tile-icon">💕</span>
+          <span class="cat-tile-label">子育て便利グッズ</span>
+          <span class="cat-tile-count">39件</span>
+        </a>
+        <a href="#cat-12" class="cat-tile">
+          <span class="cat-tile-icon">👪</span>
+          <span class="cat-tile-label">共働き・ワンオペ育児</span>
+          <span class="cat-tile-count">16件</span>
+        </a>
+        <a href="#cat-13" class="cat-tile">
+          <span class="cat-tile-icon">💰</span>
+          <span class="cat-tile-label">お金・金銭教育</span>
+          <span class="cat-tile-count">32件</span>
+        </a>
+        <a href="#cat-14" class="cat-tile">
+          <span class="cat-tile-icon">💻</span>
+          <span class="cat-tile-label">AI・デジタル時代の子育て</span>
+          <span class="cat-tile-count">35件</span>
+        </a>
+        <a href="#cat-15" class="cat-tile">
+          <span class="cat-tile-icon">🧺</span>
+          <span class="cat-tile-label">生活スキル・お手伝い</span>
+          <span class="cat-tile-count">3件</span>
+        </a>
+        <a href="#cat-16" class="cat-tile">
+          <span class="cat-tile-icon">⚽</span>
+          <span class="cat-tile-label">スポーツ・外遊び</span>
+          <span class="cat-tile-count">14件</span>
+        </a>
+        <a href="#cat-17" class="cat-tile">
+          <span class="cat-tile-icon">🏫</span>
+          <span class="cat-tile-label">習い事・教育</span>
+          <span class="cat-tile-count">7件</span>
+        </a>
+        <a href="#cat-18" class="cat-tile">
+          <span class="cat-tile-icon">🍱</span>
+          <span class="cat-tile-label">食育・健康</span>
+          <span class="cat-tile-count">19件</span>
+        </a>
+        <a href="#cat-19" class="cat-tile">
+          <span class="cat-tile-icon">🎒</span>
+          <span class="cat-tile-label">小学校準備</span>
+          <span class="cat-tile-count">5件</span>
+        </a>
+    </div>
+
+    <!-- フッター -->
+    <div class="footer">
+      <div class="footer-updated">最終更新：2026年09月19日</div>
+      <p>こそだてラボ</p>
+      <p style="margin-top:12px;">
+        当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。また楽天アフィリエイトプログラムにも参加しています。
+      </p>
+    </div>
+
   </div>
 
+  <!-- カテゴリ別ページ（タップで表示切り替え） -->
   
-        <div class="cat-section" id="cat-0">
-          <div class="cat-title">📚 英語・バイリンガル教育<span class="cat-count">21件</span></div>
+        <div class="view cat-view" id="cat-0" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">📚 英語・バイリンガル教育</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -416,10 +538,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FOxford%20Reading%20Tree%20%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%91%E3%83%83%E3%82%AF%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか16件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">はらぺこあおむし 英語ボードブック</div>
             <div class="item-stars">
@@ -612,12 +730,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%82%A4%E3%82%B9%20%E3%81%8A%E3%81%97%E3%81%A6%EF%BC%81%E3%81%97%E3%81%BE%E3%81%86%E3%81%BE%E3%81%8F%E3%82%93%E3%81%AE%E3%83%90%E3%82%A4%E3%83%AA%E3%83%B3%E3%82%AC%E3%83%AB%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%BC%E3%82%AB%E3%83%BC%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-1">
-          <div class="cat-title">📖 読み聞かせ・絵本<span class="cat-count">9件</span></div>
+        <div class="view cat-view" id="cat-1" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">📖 読み聞かせ・絵本</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -680,10 +801,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E7%B5%B5%E6%9C%AC%E6%A3%9A%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか4件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">音の出る絵本</div>
             <div class="item-stars">
@@ -732,12 +849,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E7%B5%B5%E6%9C%AC%20%E3%81%8E%E3%82%85%E3%81%A3%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-2">
-          <div class="cat-title">🌱 モンテッソーリ・知育<span class="cat-count">7件</span></div>
+        <div class="view cat-view" id="cat-2" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🌱 モンテッソーリ・知育</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -800,10 +920,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%8F%E3%82%82%E3%82%93%20%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3%E5%B0%86%E6%A3%8B%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか2件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">モンテッソーリ教育おうちでできること大百科</div>
             <div class="item-stars">
@@ -828,12 +944,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%A2%E3%83%B3%E3%83%86%E3%83%83%E3%82%BD%E3%83%BC%E3%83%AA%E6%95%99%E8%82%B2%C3%97%E3%83%8F%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E5%BC%8F%20%E5%AD%90%E3%81%A9%E3%82%82%E3%81%AE%E6%89%8D%E8%83%BD%E3%82%92%E4%BC%B8%E3%81%B0%E3%81%99%E8%A6%AA%E3%81%AE%E7%BF%92%E6%85%A3%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-3">
-          <div class="cat-title">😴 睡眠・生活リズム<span class="cat-count">14件</span></div>
+        <div class="view cat-view" id="cat-3" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">😴 睡眠・生活リズム</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -896,10 +1015,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E8%A5%BF%E5%B7%9D%20%28Nishikawa%29%20%E6%9E%95%20%E3%83%89%E3%82%AF%E3%82%BF%E3%83%BC%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%97%20%E7%9C%A0%E8%82%B2%E3%81%BE%E3%81%8F%E3%82%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか9件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">おやすみロジャー 魔法のぐっすり絵本</div>
             <div class="item-stars">
@@ -1008,12 +1123,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FCubo%20Ai%20Plus%20%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%99%E3%83%93%E3%83%BC%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%BC%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-4">
-          <div class="cat-title">💬 しつけ・声かけ・心理学<span class="cat-count">52件</span></div>
+        <div class="view cat-view" id="cat-4" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">💬 しつけ・声かけ・心理学</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -1076,10 +1194,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FHABA%20%28%E3%83%8F%E3%83%90%29%20%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AE%E3%82%B2%E3%83%BC%E3%83%A0%20%E6%9E%9C%E6%A8%B9%E5%9C%92%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか47件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">叱りゼロで「自分からやる子」に育てる本</div>
             <div class="item-stars">
@@ -1644,12 +1758,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%8A%E6%94%AF%E5%BA%A6%E3%83%9C%E3%83%BC%E3%83%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-5">
-          <div class="cat-title">📱 デジタル・知育アプリ<span class="cat-count">9件</span></div>
+        <div class="view cat-view" id="cat-5" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">📱 デジタル・知育アプリ</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -1712,10 +1829,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FJINS%20SCREEN%20KIDS%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか4件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">dretec (ドリテック) 勉強タイマー T-587</div>
             <div class="item-stars">
@@ -1764,12 +1877,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%82%B9%E3%83%9E%E3%83%9B%E8%84%B3%20%28%E6%96%B0%E6%BD%AE%E6%96%B0%E6%9B%B8%29%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-6">
-          <div class="cat-title">🧠 発達・学習サポート<span class="cat-count">36件</span></div>
+        <div class="view cat-view" id="cat-6" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🧠 発達・学習サポート</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -1832,10 +1948,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E6%A3%AE%E3%81%AE%E9%81%8A%E3%81%B3%E9%81%93%E5%85%B7%20Milky%20Toy%20%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%AF%E3%83%83%E3%82%AD%E3%83%B3%E3%82%B0%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか31件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">コイズミファニテック 学習椅子</div>
             <div class="item-stars">
@@ -2208,12 +2320,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E8%82%B2%E5%85%90%E6%97%A5%E8%A8%98%20%E3%81%99%E3%81%8F%E3%81%99%E3%81%8F%E3%82%B0%E3%83%A9%E3%83%95%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-7">
-          <div class="cat-title">💪 子育て・育児グッズ<span class="cat-count">19件</span></div>
+        <div class="view cat-view" id="cat-7" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">💪 子育て・育児グッズ</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -2276,10 +2391,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%82%A2%E3%82%A4%E3%83%AA%E3%82%B9%E3%82%AA%E3%83%BC%E3%83%A4%E3%83%9E%20%E3%81%8A%E3%82%82%E3%81%A1%E3%82%83%E5%8F%8E%E7%B4%8D%20%E3%83%88%E3%82%A4%E3%83%8F%E3%82%A6%E3%82%B9%E3%83%A9%E3%83%83%E3%82%AF%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか14件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">アンカー Soundcore Liberty 4</div>
             <div class="item-stars">
@@ -2448,12 +2559,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%8D%E3%82%82%E3%81%A1%E3%81%84%E3%82%8D%E3%81%84%E3%82%8D%E7%B5%B5%E6%9C%AC%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-8">
-          <div class="cat-title">🎵 音楽・アート<span class="cat-count">18件</span></div>
+        <div class="view cat-view" id="cat-8" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🎵 音楽・アート</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -2516,10 +2630,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%82%AB%E3%83%AF%E3%82%A4%20%E3%83%9F%E3%83%8B%E3%83%94%E3%82%A2%E3%83%8E%20P-25%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか13件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">ボーネルンド オリジナル リズムセット</div>
             <div class="item-stars">
@@ -2676,12 +2786,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E9%9B%BB%E5%8B%95%E3%83%90%E3%83%96%E3%83%AB%E3%82%AC%E3%83%B3%20%E3%82%B7%E3%83%A3%E3%83%9C%E3%83%B3%E7%8E%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-9">
-          <div class="cat-title">👨‍👩‍👧 夫婦・パートナーシップ<span class="cat-count">16件</span></div>
+        <div class="view cat-view" id="cat-9" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">👨‍👩‍👧 夫婦・パートナーシップ</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -2744,10 +2857,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%90%E3%82%8A%E3%81%A8%E3%81%90%E3%82%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか11件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">ポルバンアドバンス ヒップシート</div>
             <div class="item-stars">
@@ -2880,12 +2989,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FiRobot%20%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88%E6%8E%83%E9%99%A4%E6%A9%9F%20%E3%83%AB%E3%83%B3%E3%83%90%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-10">
-          <div class="cat-title">🌳 外遊び・おもちゃ<span class="cat-count">22件</span></div>
+        <div class="view cat-view" id="cat-10" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🌳 外遊び・おもちゃ</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -2948,10 +3060,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E7%A0%82%E5%A0%B4%E3%81%8A%E3%82%82%E3%81%A1%E3%82%83%E3%82%BB%E3%83%83%E3%83%88%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか17件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">こども探検セット</div>
             <div class="item-stars">
@@ -3156,12 +3264,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E5%AD%A6%E7%A0%94%E3%81%AE%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%20%E3%83%9C%E3%83%AA%E3%83%A5%E3%83%BC%E3%83%A0500%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-11">
-          <div class="cat-title">💕 子育て便利グッズ<span class="cat-count">39件</span></div>
+        <div class="view cat-view" id="cat-11" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">💕 子育て便利グッズ</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -3224,10 +3335,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%8D%E3%82%82%E3%81%A1%E3%81%84%E3%82%8D%E3%81%84%E3%82%8D%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか34件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">幸せな親子関係を築くための非暴力コミュニケーション</div>
             <div class="item-stars">
@@ -3636,12 +3743,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%AF%E3%83%AC%E3%83%91%E3%82%B9%20%E3%82%AF%E3%83%BC%E3%83%94%E3%83%BC%E3%83%9A%E3%83%B3%E3%82%B7%E3%83%AB%2060%E8%89%B2%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-12">
-          <div class="cat-title">👪 共働き・ワンオペ育児<span class="cat-count">16件</span></div>
+        <div class="view cat-view" id="cat-12" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">👪 共働き・ワンオペ育児</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -3704,10 +3814,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E5%BC%8F%E9%80%B1%E9%96%93%E4%BA%88%E5%AE%9A%E8%A1%A8%20%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%9C%E3%83%BC%E3%83%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか11件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">Echo Dot (エコードット) 第5世代</div>
             <div class="item-stars">
@@ -3840,12 +3946,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E5%B1%B1%E5%B4%8E%E5%AE%9F%E6%A5%AD%20tower%20%E6%8A%98%E3%82%8A%E7%95%B3%E3%81%BF%E8%B8%8F%E3%81%BF%E5%8F%B0%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-13">
-          <div class="cat-title">💰 お金・金銭教育<span class="cat-count">32件</span></div>
+        <div class="view cat-view" id="cat-13" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">💰 お金・金銭教育</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -3908,10 +4017,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%8A%E6%89%8B%E4%BC%9D%E3%81%84%E3%83%9C%E3%83%BC%E3%83%89%20%E3%81%8A%E5%B0%8F%E9%81%A3%E3%81%84%E5%B8%B3%E3%82%BB%E3%83%83%E3%83%88%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか27件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">アンパンマン ピピッとスキャン！おしゃべりレジスター</div>
             <div class="item-stars">
@@ -4236,12 +4341,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%83%90%E3%83%B3%E3%82%AF%20500%E5%86%86%E7%8E%89%E8%B2%AF%E9%87%91%E7%AE%B1%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-14">
-          <div class="cat-title">💻 AI・デジタル時代の子育て<span class="cat-count">35件</span></div>
+        <div class="view cat-view" id="cat-14" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">💻 AI・デジタル時代の子育て</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -4304,10 +4412,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%AC%E3%82%B4%28LEGO%29%20%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF%20%E9%BB%84%E8%89%B2%E3%81%AE%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%20%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AB%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか30件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">きもちの図鑑 (学研の幼児ワーク)</div>
             <div class="item-stars">
@@ -4668,12 +4772,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E5%AD%A6%E7%A0%94%E3%81%AE%E7%A7%91%E5%AD%A6%20%E3%81%82%E3%81%9D%E3%81%B6%EF%BC%81%E8%80%83%E3%81%88%E3%82%8B%EF%BC%81%E5%AE%9F%E9%A8%93%E5%9B%B3%E9%91%91DX%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-15">
-          <div class="cat-title">🧺 生活スキル・お手伝い<span class="cat-count">3件</span></div>
+        <div class="view cat-view" id="cat-15" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🧺 生活スキル・お手伝い</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -4712,12 +4819,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%AC%E3%83%83%E3%82%AF%20%E3%82%A2%E3%83%B3%E3%83%91%E3%83%B3%E3%83%9E%E3%83%B3%20%E3%83%99%E3%83%93%E3%83%BC%E3%83%8F%E3%83%B3%E3%82%AC%E3%83%BC%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-16">
-          <div class="cat-title">⚽ スポーツ・外遊び<span class="cat-count">14件</span></div>
+        <div class="view cat-view" id="cat-16" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">⚽ スポーツ・外遊び</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -4780,10 +4890,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E5%BC%8F%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%9C%E3%83%BC%E3%83%89%E3%82%B7%E3%83%BC%E3%83%88%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか9件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">モルテン サッカーボール ペレーダ</div>
             <div class="item-stars">
@@ -4892,12 +4998,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E5%B0%8F%E5%AD%A6%E9%A4%A8%E3%81%AE%E5%9B%B3%E9%91%91NEO%20%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-17">
-          <div class="cat-title">🏫 習い事・教育<span class="cat-count">7件</span></div>
+        <div class="view cat-view" id="cat-17" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🏫 習い事・教育</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -4960,10 +5069,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E5%AD%90%E3%81%A9%E3%82%82%E3%81%8C%E8%82%B2%E3%81%A4%E9%AD%94%E6%B3%95%E3%81%AE%E8%A8%80%E8%91%89%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか2件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">こころのしくみえほん</div>
             <div class="item-stars">
@@ -4988,12 +5093,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%81%AF%E3%81%81%E3%81%A3%E3%81%A6%E8%A8%80%E3%81%86%E3%82%B2%E3%83%BC%E3%83%A0%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-18">
-          <div class="cat-title">🍱 食育・健康<span class="cat-count">19件</span></div>
+        <div class="view cat-view" id="cat-18" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🍱 食育・健康</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -5056,10 +5164,6 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E4%B9%B3%E6%AD%AF%E3%82%B1%E3%83%BC%E3%82%B9%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
-          <details class="more-items">
-            <summary>ほか14件を見る ▼</summary>
-            
           <div class="item-card">
             <div class="item-name">森永乳業 こどミル スティックタイプ いちごミルク風味</div>
             <div class="item-stars">
@@ -5228,12 +5332,15 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FDHC%20%E3%81%93%E3%81%A9%E3%82%82%E9%89%84%EF%BC%8B%E4%B9%B3%E9%85%B8%E8%8F%8C%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-          </details>
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
-        <div class="cat-section" id="cat-19">
-          <div class="cat-title">🎒 小学校準備<span class="cat-count">5件</span></div>
+        <div class="view cat-view" id="cat-19" hidden>
+          <div class="cat-view-bar">
+            <a href="#" class="back-link">‹ カテゴリ一覧</a>
+            <span class="cat-view-title">🎒 小学校準備</span>
+          </div>
+          <div class="pr-note pr-note-sm">⚠️ Amazon・楽天のアフィリエイトリンクを含みます（#PR）</div>
           <div class="cat-body">
             
           <div class="item-card">
@@ -5296,19 +5403,34 @@
               <a href="https://hb.afl.rakuten.co.jp/ichiba/5295edef.ebbabe85.5295edf0.3aec78b4/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%89%E3%83%AA%E3%83%86%E3%83%83%E3%82%AF%20%E5%AD%A6%E7%BF%92%E3%82%BF%E3%82%A4%E3%83%9E%E3%83%BC%2F" class="btn btn-rakuten btn-sm" target="_blank" rel="noopener">🛍️ 楽天で見る</a>
             </div>
           </div>
-            
           </div>
-          <a href="#top" class="back-to-top">↑ カテゴリ一覧に戻る</a>
+          <a href="#" class="back-to-top">‹ カテゴリ一覧に戻る</a>
         </div>
 
-  <!-- フッター -->
-  <div class="footer">
-    <div class="footer-updated">最終更新：2026年09月19日</div>
-    <p>こそだてラボ</p>
-    <p style="margin-top:12px;">
-      当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。また楽天アフィリエイトプログラムにも参加しています。
-    </p>
-  </div>
+  <script>
+    (function () {
+      var home = document.getElementById('view-home');
+      var catViews = document.querySelectorAll('.cat-view');
+
+      function showView() {
+        var hash = location.hash.replace('#', '');
+        var target = hash ? document.getElementById(hash) : null;
+
+        catViews.forEach(function (el) { el.hidden = true; });
+
+        if (target && target.classList.contains('cat-view')) {
+          home.hidden = true;
+          target.hidden = false;
+        } else {
+          home.hidden = false;
+        }
+        window.scrollTo(0, 0);
+      }
+
+      window.addEventListener('hashchange', showView);
+      showView();
+    })();
+  </script>
 
 </body>
 </html>
